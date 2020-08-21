@@ -29,6 +29,8 @@ import org.apache.maven.project.MavenProject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import org.codehaus.plexus.util.Os;
+import org.codehaus.plexus.util.StringUtils;
 
 /**
  * Set a property to the user-uid and user-gid that is running
@@ -53,8 +55,23 @@ public class UidMojo
 
     @Parameter(defaultValue = "${project}")
     private MavenProject project;
-
+    
+    /**
+     * by default skip is auto determined - if OS==Windows skip.
+     * setting skip will either force skip or force run.
+     */
+    @Parameter
+    private Boolean skip = null;
+    
     public void execute() throws MojoExecutionException {
+        getLog().info("OS="+Os.OS_FAMILY + " skip = "+skip); 
+        
+        skip = skip != null? skip: isWindows();
+        
+        if(skip) {
+            getLog().info("uid-maven-plugin skipped."); 
+            return;
+        }
 
         getLog().debug("Start uid-maven-plugin with param:");
         getLog().debug("uidPropertyName: " + _uidPropertyName);
@@ -69,6 +86,10 @@ public class UidMojo
             throw new MojoExecutionException(e.getMessage(), e);
         }
         getLog().debug("Finish id-maven-plugin with SUCCESS ...");
+    }
+    
+    private boolean isWindows() {
+        return Os.isFamily(Os.FAMILY_WINDOWS);
     }
 
     private String getId(String param) throws IOException, MojoExecutionException {

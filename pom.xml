@@ -4,7 +4,7 @@
   <groupId>org.jrichard.util</groupId>
   <artifactId>uid-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
-  <version>1.1-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
 
   <name>uid-maven-plugin Maven Mojo</name>
   <url>http://github.com/jrichard8/uid-maven-plugin</url>
@@ -169,7 +169,7 @@
         </executions>
       </plugin>
 
-      <plugin>
+     <!-- <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
         <executions>
@@ -181,7 +181,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin>-->
     </plugins>
   </build>
 
@@ -196,7 +196,7 @@
       </activation>
       <build>
         <plugins>
-          <plugin>
+         <!-- <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-gpg-plugin</artifactId>
             <executions>
@@ -208,7 +208,7 @@
                 </goals>
               </execution>
             </executions>
-          </plugin>
+          </plugin>-->
         </plugins>
       </build>
     </profile>
